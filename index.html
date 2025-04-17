@@ -1,61 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Date Widget</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Date Widget</title>
   <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    background-color: black;
-    color: white;
-    font-family: 'Segoe UI', sans-serif;
-    height: 100vh;
-    overflow: hidden; /* 스크롤 방지 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+    /* 전체 화면 설정 및 기본 스타일 */
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      overflow: hidden; /* 스크롤 방지 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
-  .date {
-    font-size: 14vw;
-    font-weight: bold;
-    letter-spacing: 0.1em;
-  }
-
-  .day {
-    font-size: 4vw;
-    margin-top: 1vh;
-    color: #aaa;
-  }
-
-  @media (max-width: 600px) {
+    /* 날짜 스타일 (큰 숫자) */
     .date {
-      font-size: 20vw;
+      font-size: 14vw;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
     }
+
+    /* 요일 스타일 */
     .day {
-      font-size: 6vw;
+      font-size: 6vw; /* 기존 4vw에서 50% 증가 */
+      margin-top: 1vh;
+      color: #aaa;
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+      animation-delay: 0.4s; /* 숫자보다 살짝 늦게 등장 */
     }
-  }
-</style>
+
+    /* fade-in 애니메이션 정의 */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 모바일 반응형 스타일 */
+    @media (max-width: 600px) {
+      .date {
+        font-size: 20vw;
+      }
+      .day {
+        font-size: 9vw;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="widget">
-    <div class="date" id="date">-- --</div>
-    <div class="day" id="day">----</div>
-  </div>
+  <!-- 위젯 콘텐츠 시작 -->
+  <div class="date" id="date">-- --</div>
+  <div class="day" id="day">----</div>
 
   <script>
+    // 현재 날짜 및 요일 계산
     const now = new Date();
     const month = String(now.getMonth() + 1).padStart(2, '0');
     const day = String(now.getDate()).padStart(2, '0');
-    const weekdays = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+    const weekdays = ["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"];
     const weekday = weekdays[now.getDay()];
 
+    // 화면에 출력
     document.getElementById('date').textContent = `${month} ${day}`;
     document.getElementById('day').textContent = weekday;
   </script>
 </body>
 </html>
+
