@@ -1,0 +1,53 @@
+<!-- calendar.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notion Calendar Widget</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      background: black; color: white;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .calendar {
+      text-align: center;
+    }
+    .date {
+      font-size: 5em;
+      font-weight: bold;
+    }
+    .day {
+      font-size: 1em;
+      margin-top: 10px;
+      color: #bbb;
+      text-transform: uppercase;
+    }
+    @media (max-width: 600px) {
+      .date { font-size: 3em; }
+      .day { font-size: 0.8em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="calendar">
+    <div class="date" id="date">-- --</div>
+    <div class="day" id="day">---</div>
+  </div>
+
+  <script>
+    const now = new Date();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const week = ["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"];
+    document.getElementById("date").textContent = `${month} ${day}`;
+    document.getElementById("day").textContent = week[now.getDay()];
+  </script>
+</body>
+</html>
