@@ -5,45 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simple Date Widget</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background-color: black;
-      color: white;
-      font-family: 'Segoe UI', sans-serif;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .widget {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* 상단 정렬 */
+    height: 100vh;
+    padding-top: 5vh; /* 위에 약간의 여백만 */
+  }
+
+  .date {
+    font-size: 14vw;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+  }
+
+  .day {
+    font-size: 4vw;
+    margin-top: 1vh;
+    color: #aaa;
+  }
+
+  @media (max-width: 600px) {
     .date {
-      display: flex;
-      font-size: 8vw;
-      font-weight: bold;
-      letter-spacing: 8px;
+      font-size: 20vw;
     }
     .day {
-      font-size: 1.5vw;
-      margin-top: 8px;
-      color: #ccc;
-      text-transform: uppercase;
+      font-size: 6vw;
     }
-
-    @media (max-width: 600px) {
-      .date {
-        font-size: 16vw;
-      }
-      .day {
-        font-size: 3.5vw;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
   <div class="widget">
