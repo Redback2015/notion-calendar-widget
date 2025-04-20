@@ -5,75 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Date Widget</title>
   <style>
+    /* ========== 기본 화면 설정 ========== */
     html, body {
-      margin: 0;
-      padding: 0;
-      background-color: #191919 !important;
-      color: white;
-      font-family: 'Segoe UI', sans-serif;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      margin: 0; /* 여백 제거 */
+      padding: 0; /* 패딩 제거 */
+      background-color: #191919 !important; /* 배경색: 진한 회색 */
+      color: white; /* 기본 텍스트 색상 (기본값, 일부는 별도로 덮어씀) */
+      font-family: 'Segoe UI', sans-serif; /* 전체 폰트 스타일 */
+      height: 100vh; /* 화면 전체 높이 사용 */
+      overflow: hidden; /* 스크롤 숨김 */
+      display: flex; /* 중앙 정렬을 위한 flexbox 사용 */
+      flex-direction: column; /* 위에서 아래로 쌓기 */
+      align-items: center; /* 가로 가운데 정렬 */
+      justify-content: center; /* 세로 가운데 정렬 */
     }
 
+    /* ========== 날짜 + 요일 전체 묶는 컨테이너 ========== */
     .date-block {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
+    /* ========== 날짜 텍스트 스타일 (예: 04 20) ========== */
     .date {
-      font-size: 12vw;
-      font-weight: bold;
-      letter-spacing: 0.1em;
-      opacity: 0;
-      animation: fadeIn 1s ease-in-out forwards;
+      font-size: 12vw; /* 반응형 글씨 크기 (뷰포트 너비 기준) */
+      font-weight: bold; /* 굵게 */
+      letter-spacing: 0.1em; /* 자간 넓힘 */
+      color: #aaa; /* 💡 요일과 통일된 연회색으로 설정 */
+      opacity: 0; /* 처음엔 안 보이게 */
+      animation: fadeIn 1s ease-in-out forwards; /* 부드럽게 등장하는 애니메이션 */
     }
 
+    /* ========== 요일 텍스트 스타일 (예: SUNDAY) ========== */
     .day {
-      font-size: 32px;
-      font-weight: 600;
-      color: #aaa;
-      margin-top: 0.5vh;
+      font-size: 32px; /* 고정 크기 (반응형 아님) */
+      font-weight: 600; /* 살짝 굵게 */
+      color: #aaa; /* 연회색 */
+      margin-top: 0.5vh; /* 날짜와 약간 간격 */
       opacity: 0;
       animation: fadeIn 1s ease-in-out forwards;
-      animation-delay: 0.4s;
-      text-transform: uppercase;
+      animation-delay: 0.4s; /* 날짜보다 약간 늦게 등장 */
+      text-transform: uppercase; /* 모두 대문자로 표시 */
     }
 
+    /* ========== 부드럽게 나타나는 애니메이션 정의 ========== */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* ========== 작은 화면 (모바일)용 스타일 조정 ========== */
     @media (max-width: 600px) {
       .date {
-        font-size: 20vw;
+        font-size: 20vw; /* 더 작은 화면에선 글자 더 크게 */
       }
 
       .day {
-        font-size: 20px;
+        font-size: 20px; /* 요일도 줄여서 조정 */
       }
     }
   </style>
 </head>
 <body>
+  <!-- 날짜 + 요일 묶음 -->
   <div class="date-block">
-    <div class="date" id="date">-- --</div>
-    <div class="day" id="day">----</div>
+    <div class="date" id="date">-- --</div> <!-- 날짜 자리 -->
+    <div class="day" id="day">----</div>     <!-- 요일 자리 -->
   </div>
 
   <script>
+    // 📅 현재 날짜 가져오기
     const now = new Date();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // 월 (01~12)
+    const day = String(now.getDate()).padStart(2, '0');        // 일 (01~31)
+
+    // 요일 배열 (일요일부터 시작)
     const weekdays = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
-    const weekday = weekdays[now.getDay()];
-    document.getElementById('date').textContent = `${month} ${day}`;
-    document.getElementById('day').textContent = weekday;
+    const weekday = weekdays[now.getDay()]; // 현재 요일 인덱스로 가져오기
+
+    // ⏱ 화면에 날짜와 요일 표시
+    document.getElementById('date').textContent = `${month} ${day}`; // 예: 04 20
+    document.getElementById('day').textContent = weekday;            // 예: SUNDAY
   </script>
 </body>
 </html>
