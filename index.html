@@ -5,14 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Date Widget</title>
   <style>
-    body {
-    background-color: #191919 !important; /* 강제로 배경 고정 */
-}
-
     html, body {
       margin: 0;
       padding: 0;
-      background-color: #191919;
+      background-color: #191919 !important;
       color: white;
       font-family: 'Segoe UI', sans-serif;
       height: 100vh;
@@ -38,7 +34,7 @@
     }
 
     .day {
-      font-size: 32px; /* 고정 크기 */
+      font-size: 32px;
       font-weight: 600;
       color: #aaa;
       margin-top: 0.5vh;
@@ -55,3 +51,29 @@
 
     @media (max-width: 600px) {
       .date {
+        font-size: 20vw;
+      }
+
+      .day {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="date-block">
+    <div class="date" id="date">-- --</div>
+    <div class="day" id="day">----</div>
+  </div>
+
+  <script>
+    const now = new Date();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const weekdays = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
+    const weekday = weekdays[now.getDay()];
+    document.getElementById('date').textContent = `${month} ${day}`;
+    document.getElementById('day').textContent = weekday;
+  </script>
+</body>
+</html>
